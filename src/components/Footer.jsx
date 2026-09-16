@@ -26,7 +26,7 @@ export default function Footer() {
               TVMaze API
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/Mushf1qur/movie-explorer"
               target="_blank"
               rel="noreferrer"
               className="text-dust transition-colors hover:text-brass-bright"
