@@ -1,0 +1,110 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Repertory cinema lobby: oxblood velvet, bone paper, brass fittings. */
+  --color-velvet: #2b0e14;
+  --color-velvet-deep: #1b070c;
+  --color-velvet-lift: #3a171d;
+  --color-bone: #f0e6d6;
+  --color-dust: #b39a98;
+  --color-brass: #c99a46;
+  --color-brass-bright: #e2b866;
+  --color-sage: #8d9b78;
+
+  --font-display: 'Bodoni Moda', Georgia, 'Times New Roman', serif;
+  --font-body: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-frame: 3px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-velvet);
+    color: var(--color-bone);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Keyboard focus stays visible everywhere, pointer focus stays quiet. */
+  :focus-visible {
+    outline: 2px solid var(--color-brass-bright);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-brass);
+    color: var(--color-velvet-deep);
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+}
+
+/* Single decorative flourish: the marquee bulbs beneath the hero. */
+.marquee-bulbs {
+  height: 10px;
+  background-image: radial-gradient(
+    circle at center,
+    var(--color-brass-bright) 0 2px,
+    color-mix(in srgb, var(--color-brass) 28%, transparent) 2px 3.2px,
+    transparent 3.4px
+  );
+  background-size: 22px 10px;
+  background-repeat: repeat-x;
+}
+
+/* The one orchestrated motion in the app: the details panel opening. */
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-backdrop-in {
+  animation: backdrop-in 180ms ease-out both;
+}
+
+.animate-panel-in {
+  animation: panel-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
